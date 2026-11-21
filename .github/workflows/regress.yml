@@ -1,0 +1,115 @@
+name: Compare pages
+
+# For a pull request that changes the code, the calendars or the texts: the
+# unit tests, then the pages of regress/pages.txt (with pages that show the
+# data files it changes) rendered with the base branch and with the pull
+# request, the data files it changes checked, and the report in the run's
+# summary (regress/README.md). The pages are shared among eight machines,
+# and one job merges what they found. It fails only when a test fails, a
+# page that renders in the base fails in the pull request, a data file has
+# an error, or a machine does not finish; a page that changes is no failure.
+# The errors are also annotations, which the pull request shows with its
+# checks and, at their file and line, in its diff.
+
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+      - 'regress/**'
+      - 't/**'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Perl
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: '5.40'
+
+      - name: Install modules
+        run: cpanm --notest CGI
+
+      - name: Unit tests
+        run: prove -r -I web/cgi-bin/ t
+
+  pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Anything to render?
+        id: changed
+        # the checkout is the pull request merged into its base, whose first
+        # parent is the base: no page can change unless web/ or regress/ did
+        run: |
+          if git diff --quiet HEAD^1 HEAD -- web/ regress/; then
+            echo "render=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "render=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out the base beside it
+        if: steps.changed.outputs.render == 'yes'
+        run: git worktree add --detach ../base HEAD^1
+
+      - name: Set up Perl
+        if: steps.changed.outputs.render == 'yes'
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: '5.40'
+
+      - name: Install modules
+        if: steps.changed.outputs.render == 'yes'
+        run: cpanm --notest CGI Algorithm::Diff
+
+      - name: Compare this shard's pages
+        if: steps.changed.outputs.render == 'yes'
+        run: perl regress/compare.pl ../base . --jobs 4 --shard ${{ matrix.shard }}/8 --json shard-${{ matrix.shard }}.json
+
+      - name: Keep what it found
+        if: steps.changed.outputs.render == 'yes'
+        uses: actions/upload-artifact@v4
+        with:
+          name: shard-${{ matrix.shard }}
+          path: shard-${{ matrix.shard }}.json
+          retention-days: 7
+
+  report:
+    needs: pages
+    # also when a shard failed: the report says which
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Gather the shards
+        uses: actions/download-artifact@v4
+        with:
+          pattern: shard-*
+          merge-multiple: true
+          path: shards
+
+      - name: Report
+        env:
+          PAGES: ${{ needs.pages.result }}
+        run: |
+          if ls shards/shard-*.json > /dev/null 2>&1; then
+            perl regress/compare.pl --merge shards/shard-*.json --shards 8 --summary "$GITHUB_STEP_SUMMARY" --annotate
+          elif [ "$PAGES" = success ]; then
+            echo "No change under web/ or regress/: no page to compare." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo '::error title=Pages not compared::No shard finished: the logs of the "pages" jobs say why.'
+            exit 1
+          fi
