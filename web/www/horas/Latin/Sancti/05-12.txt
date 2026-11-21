@@ -1,5 +1,5 @@
 [Officium]
-Ss. Nerei, Achillei et Domitillæ Virg. atque Pancratii Martyrum
+Ss. Nerei, Achilei et Domitillæ Virg. atque Pancratii Martyrum
 
 [Rank]
 ;;Semiduplex;;2.2;;vide C3a-1
@@ -15,7 +15,7 @@ Semper nos, Dómine, Mártyrum tuórum Nérei, Achíllei, Domitíllæ atque Panc
 $Per Dominum
 
 [Lectio4]
-Nereus et Achilleus fratres eunuchi Flaviæ Domitillæ, a beato Petro una cum ipsa ejusque matre Plautilla baptizati, cum Domitillæ persuasissent, ut virginitátem suam Deo consecraret, ab ejus sponso Aureliáno tamquam Christiáni accusati, ob præcláram fidei confessiónem in Pontiam insulam relegántur. Ubi ad quæstiónem íterum vocáti et verbéribus cæsi, mox Tarracinam perducti, a Minucio Rufo equuleo et flammis cruciati, cum constanter negarent se, a sancto Petro Apóstolo baptizatos, ullis tormentis cogi posse ut idolis immolarent, secúri percússi sunt. Quorum córpora ab Auspicio, eórum discipulo et Domitillæ educatore, Romam delata, via Ardeatina sepúlta sunt.
+Nereus et Achilleus fratres eunuch Flaviæ Domitillæ, a beato Petro una cum ipsa ejusque matre Plautilla baptizati, cum Domitillæ persuasissent, ut virginitátem suam Deo consecraret, ab ejus sponso Aureliáno tamquam Christiáni accusati, ob præcláram fidei confessiónem in Pontiam insulam relegántur. Ubi ad quæstiónem íterum vocáti et verbéribus cæsi, mox Tarracinam perducti, a Minucio Rufo equuleo et flammis cruciati, cum constanter negarent se, a sancto Petro Apóstolo baptizatos, ullis tormentis cogi posse ut idolis immolarent, secúri percússi sunt. Quorum córpora ab Auspicio, eórum discipulo et Domitillæ educatore, Romam delata, via Ardeatina sepúlta sunt.
 
 [Lectio5]
 Flavia Domitilla virgo Romana, Titi et Domitiáni imperatórum neptis, cum sacrum virginitátis velámen a beato Cleménte Papa accepísset, ab Aureliáno sponso, Titi Aurelii consulis fílio, deláta quod Christiana esset, a Domitiáno imperatóre in insulam Pontiam est deportata, ubi in carcere longum martyrium duxit. Demum Tarracinam deducta, íterum Christum confessa, cum semper constantior apparéret, sub Trajano imperatóre, júdicis jussu incénso ejus cubiculo, una cum Theodora et Euphrosyna virgínibus et collactaneis suis, gloriosi martyrii cursum confecit, Nonis Maji: quarum corpora, integra invénta, a Cæsario diacono sepúlta sunt. Hac vero die duórum fratrum ac Domitillæ corpora, ex diaconía sancti Hadriáni simul translata, in ipsórum Mártyrum basilicam, tituli Fascíolæ, restituta sunt.

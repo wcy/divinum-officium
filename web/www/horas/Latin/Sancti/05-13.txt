@@ -20,7 +20,7 @@ Deus, qui ad errórum insídias repelléndas et apostólicæ Sedis jura propugn�
 $Per Dominum
 
 [Lectio1]
-@Commune/C4a
+@Commune/C4x
 
 [Lectio2]
 @Commune/C4a
