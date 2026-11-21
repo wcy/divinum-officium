@@ -1323,7 +1323,7 @@ sub concurrence {
       $commemoratio = $cwinner;
       $dayname[2] = "Commemoratio: $cwrank[0]";
       $dayname[3] = "Vespera de præcedenti; commemoratio de sequenti";
-      $dayname[2] .= " Dominica" if $cwinner{Rank} =~ /Dominica/i;
+      $dayname[3] .= " Dominica" if $cwinner{Rank} =~ /Dominica/i;
     } elsif ($flcrank == $flrank) {    # "flattend ranks" are equal => a capitulo
       $commemoratio = $winner;
       %commune =
