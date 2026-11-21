@@ -53,7 +53,13 @@ sub liturgical_color {
   return 'black' if (/(?:Conversione|Dedicatione|Cathedra|oann|Pasch|Confessor|Ascensio|Cena)/i);
   return 'green' if (/(?:Pentecosten(?!.*infra octavam)|Epiphaniam|post octavam)/i);
   return 'red' if (/(?:Pentecostes|Evangel|Innocentium|Sanguinis|Cruc|Apostol)/i);
-  return 'green' if (/(?:heri|cras|Augustis|Septembris|Octobris|Novembris|curr)/i);
+
+  # The Ordo's notes on the first nocturn's lessons ("ex heri", "e cras",
+  # "ex Feria curr.") and the weeks of August to November ("Dominica II.
+  # Augusti", "Tempora: V. Octobris"). Whole words, and a month only after a
+  # week's number, so that no saint's title matches ("Catherine",
+  # "SS. Angelorum Custodum Septembris").
+  return 'green' if (/\b(?:heri|cras|curr)\b|\b[IVX]+\. (?:Augusti|Septembris|Octobris|Novembris)/i);
   return 'black';
 }
 1;

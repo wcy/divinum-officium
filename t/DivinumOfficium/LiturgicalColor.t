@@ -194,6 +194,24 @@ is(liturgical_color('S. Joseph Opificis'), 'black', 'St Joseph the Worker (a 196
 is(liturgical_color('Sanctissimi Nominis Jesu'), 'black', 'The Holy Name of Jesus is white');
 is(liturgical_color('Omnium Sanctorum'), 'black', 'All Saints is white');
 
+### The Ordo's notes on the first nocturn's lessons - green
+
+is(liturgical_color('heri'), 'green', 'The lessons "ex heri" are green');
+is(liturgical_color('cras'), 'green', 'The lessons "e cras" are green');
+is(liturgical_color('Feria curr.'), 'green', 'The lessons "ex Feria curr." are green');
+is(liturgical_color('Dominica I. Augusti'), 'green', 'The lessons of a week of August are green');
+is(
+  liturgical_color('Feria II post Dominicam III. Septembris'),
+  'green', 'The lessons of a week of September are green',
+);
+is(liturgical_color('Sabbato post Dominica IV. Novembris'), 'green', 'The lessons of a week of November are green');
+is(liturgical_color('V. Octobris'), 'green', 'A week of October named by its number alone is green');
+
+# Real titles that hold those letters inside a word, or a month's name.
+is(liturgical_color('St. Catherine of Siena, Virgin'), 'black', 'St Catherine of Siena (English title) is white');
+is(liturgical_color('St. Catherine de Ricci, V., O.P.'), 'black', 'St Catherine de Ricci (OP 1962) is white');
+is(liturgical_color('SS. Angelorum Custodum Septembris'), 'black', 'The Guardian Angels in September is white');
+
 ### All Souls - black (grey here)
 
 is(liturgical_color('In Commemoratione Omnium Fidelium Defunctorum'), 'grey', 'All Souls is black (grey here)');
